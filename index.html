@@ -22,23 +22,46 @@
   </head>
   <body>
     <div class="container mt-5">
-      <div class="form-group">
-        <h3>Tạo dãy số</h3>
-        <input
-          type="number"
-          class="form-control col-6 mb-2"
-          id="create-element"
-          placeholder=""
-        />
-        <button class="btn btn-success col-1 mb-2" onclick="addElement()">
-          Thêm
-        </button>
-        <button class="btn btn-danger col-1 mb-2" onclick="clearElement()">
-          Clear
-        </button>
-        <div class="result col-6 p-2">
+      <div class="row">
+        <div class="form-group col-12 mb-2">
+          <h3>Tạo dãy số</h3>
+          <input
+            type="number"
+            class="form-control col-6 mb-2"
+            id="create-element"
+            placeholder=""
+          />
+        </div>
+        <div class="col-12">
+          <button
+            class="btn btn-success col-1 mb-2 mr-2"
+            onclick="addElement()"
+          >
+            Thêm
+          </button>
+          <button
+            class="btn btn-success col-1 mb-2 mr-2"
+            onclick="addRandomElement()"
+          >
+            Random
+          </button>
+          <button
+            class="btn btn-danger col-1 mb-2 mr-2"
+            onclick="clearElement()"
+          >
+            Clear
+          </button>
+        </div>
+        <div class="result col-6 p-2 mb-2">
           <p>Dãy số: <span id="result"></span></p>
         </div>
+        <button
+          class="btn btn-danger col-1 mb-2 ml-auto"
+          onclick="toggleCollapse()"
+          style="margin-left: 15px; margin-right: 15px"
+        >
+          Collapse
+        </button>
       </div>
       <div class="accordion" id="accordionExample">
         <!-- 1. Tổng số dương -->
@@ -53,7 +76,7 @@
                 aria-expanded="true"
                 aria-controls="collapseOne"
               >
-                Tổng số dương
+                1. Tổng số dương
               </button>
             </h2>
           </div>
@@ -78,7 +101,7 @@
                 aria-expanded="true"
                 aria-controls="collapse2"
               >
-                Đếm số dương
+                2. Đếm số dương
               </button>
             </h2>
           </div>
@@ -103,7 +126,7 @@
                 aria-expanded="true"
                 aria-controls="collapse3"
               >
-                Tìm số nhỏ nhất
+                3. Tìm số nhỏ nhất
               </button>
             </h2>
           </div>
@@ -128,7 +151,7 @@
                 aria-expanded="true"
                 aria-controls="collapse4"
               >
-                Tìm số dương nhỏ nhất
+                4. Tìm số dương nhỏ nhất
               </button>
             </h2>
           </div>
@@ -153,7 +176,7 @@
                 aria-expanded="true"
                 aria-controls="collapse5"
               >
-                Tìm số chẵn cuối cùng
+                5. Tìm số chẵn cuối cùng
               </button>
             </h2>
           </div>
@@ -178,7 +201,7 @@
                 aria-expanded="true"
                 aria-controls="collapse6"
               >
-                Đổi chỗ
+                6. Đổi chỗ
               </button>
             </h2>
           </div>
@@ -226,7 +249,7 @@
                 aria-expanded="true"
                 aria-controls="collapse7"
               >
-                Sắp xếp tăng dần
+                7. Sắp xếp tăng dần
               </button>
             </h2>
           </div>
@@ -251,7 +274,7 @@
                 aria-expanded="true"
                 aria-controls="collapse8"
               >
-                Tìm số nguyên tố đầu tiên
+                8. Tìm số nguyên tố đầu tiên
               </button>
             </h2>
           </div>
@@ -276,7 +299,7 @@
                 aria-expanded="true"
                 aria-controls="collapse9"
               >
-                Đếm số nguyên
+                9. Đếm số nguyên
               </button>
             </h2>
           </div>
@@ -324,7 +347,7 @@
                 aria-expanded="true"
                 aria-controls="collapse10"
               >
-                So sánh số lượng số âm và dương
+                10. So sánh số lượng số âm và dương
               </button>
             </h2>
           </div>

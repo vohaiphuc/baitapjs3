@@ -16,4 +16,10 @@ a {
   background: rgba(0, 0, 0, 0.03);
   border-radius: 5px;
   border: 1px solid rgba(0, 0, 0, 0.125);
+  margin-left: 15px;
+  margin-right: 15px;
+}
+
+input#create-element {
+  margin-bottom: 0 !important;
 }

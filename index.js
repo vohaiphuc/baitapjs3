@@ -1,8 +1,8 @@
 let MY_ARRAY = [];
 let newArray = []; // sau khi add số thực - bài 9
 function addElement() {
-  let newElem = document.getElementById("create-element").value * 1;
-  if (newElem !== "") {
+  let newElem = document.getElementById("create-element").value.trim() * 1;
+  if (newElem > 0) {
     MY_ARRAY.push(newElem);
     newArray = [...MY_ARRAY];
     document.getElementById("result").innerText = MY_ARRAY.join(", ");
@@ -10,6 +10,21 @@ function addElement() {
     document.getElementById("create-element").focus();
     tinhTatCa();
   }
+}
+
+function addRandomElement() {
+  let random = Math.floor(Math.random() * 100);
+  let ratio = Math.random();
+  if (ratio < 0.5) {
+    random = -random;
+  }
+
+  MY_ARRAY.push(random);
+  newArray = [...MY_ARRAY];
+  document.getElementById("result").innerText = MY_ARRAY.join(", ");
+  document.getElementById("create-element").value = "";
+  document.getElementById("create-element").focus();
+  tinhTatCa();
 }
 
 function clearElement() {
@@ -21,6 +36,14 @@ function clearElement() {
 
 function ghiDapAn(bai, dapAn) {
   document.querySelector(`#b${bai} .card-body`).innerHTML = dapAn;
+}
+
+let collapse = true;
+function toggleCollapse() {
+  document.querySelectorAll(".collapse").forEach((e) => {
+    e.classList = collapse ? "collapse" : "collapse show";
+  });
+  collapse = !collapse;
 }
 
 // Demo area - For testing only
@@ -60,19 +83,10 @@ function tinhBai1() {
   // for (var i in MY_ARRAY) {
   //   tong += MY_ARRAY[i] > 0 ? MY_ARRAY[i] : 0;
   // }
-  // ghiDapAn(1, `Tổng số dương = ${tong}`);
-  let tong = MY_ARRAY.reduce((prev, current) => {
-    if (current > 0) {
-      return prev + current;
-    } else {
-      return current;
-    }
-  }, 0);
-  ghiDapAn(1, `Tổng số dương = ${tong}`);
-}
-
-function tinhBai1_ver2() {
-  let tong = MY_ARRAY.reduce((prev, current) => prev + current, 0);
+  let tong = MY_ARRAY.reduce(
+    (prev, current) => (current > 0 ? prev + current : prev),
+    0
+  );
   ghiDapAn(1, `Tổng số dương = ${tong}`);
 }
 
@@ -83,10 +97,14 @@ function tinhBai1_ver2() {
  * output: đếm các số dương có trong mảng
  */
 function tinhBai2() {
-  let tong = 0;
-  for (var i in MY_ARRAY) {
-    tong += MY_ARRAY[i] > 0 ? 1 : 0;
-  }
+  // let tong = 0;
+  // for (var i in MY_ARRAY) {
+  //   tong += MY_ARRAY[i] > 0 ? 1 : 0;
+  // }
+  let tong = MY_ARRAY.reduce(
+    (prev, current) => (current > 0 ? ++prev : prev),
+    0
+  );
   ghiDapAn(2, `Số lượng các số dương = ${tong}`);
 }
 
@@ -136,8 +154,10 @@ function tinhBai6() {
   const viTri1 = document.getElementById("b6-vi-tri-1").value * 1;
   const viTri2 = document.getElementById("b6-vi-tri-2").value * 1;
   const new_MY_ARRAY = [...MY_ARRAY];
-  new_MY_ARRAY[viTri1] = new_MY_ARRAY[viTri2];
-  new_MY_ARRAY[viTri2] = new_MY_ARRAY[viTri1];
+  const char1 = new_MY_ARRAY[viTri1];
+  const char2 = new_MY_ARRAY[viTri2];
+  new_MY_ARRAY[viTri1] = char2;
+  new_MY_ARRAY[viTri2] = char1;
   document.getElementById("b6-result").innerText =
     "Mảng sau khi đổi chỗ: " +
     new_MY_ARRAY.join(", ") +
@@ -164,8 +184,8 @@ function tinhBai7() {
 function kiemTraSoNguyenTo(number) {
   if (
     number < 2 ||
-    Number.isInteger(number) == false ||
-    (number > 2 && number % 2 == 0)
+    Number.isInteger(number) == false || // ko phải số nguyên
+    (number > 2 && number % 2 == 0) // là số chẵn >2
   ) {
     return false;
   } else if (number == 2) {
