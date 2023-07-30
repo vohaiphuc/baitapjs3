@@ -1,8 +1,10 @@
 let MY_ARRAY = [];
+let newArray = []; // sau khi add số thực - bài 9
 function addElement() {
   let newElem = document.getElementById("create-element").value * 1;
   if (newElem !== "") {
     MY_ARRAY.push(newElem);
+    newArray = [...MY_ARRAY];
     document.getElementById("result").innerText = MY_ARRAY.join(", ");
     document.getElementById("create-element").value = "";
     document.getElementById("create-element").focus();
@@ -12,6 +14,7 @@ function addElement() {
 
 function clearElement() {
   MY_ARRAY = [];
+  newArray = [];
   document.getElementById("result").innerText = MY_ARRAY.join(", ");
   document.getElementById("create-element").value = "";
 }
@@ -20,8 +23,8 @@ function ghiDapAn(bai, dapAn) {
   document.querySelector(`#b${bai} .card-body`).innerHTML = dapAn;
 }
 
-// Demo only
-runDemo();
+// Demo area - For testing only
+// runDemo();
 function runDemo() {
   MY_ARRAY = [1, 23, 2, 3, 4, 5, -1, -2, -3, -4, -5];
   document.getElementById("result").innerText = MY_ARRAY.join(", ");
@@ -53,10 +56,23 @@ function tinhTatCa() {
  * output: tổng các số dương có trong mảng
  */
 function tinhBai1() {
-  let tong = 0;
-  for (var i in MY_ARRAY) {
-    tong += MY_ARRAY[i] > 0 ? MY_ARRAY[i] : 0;
-  }
+  // let tong = 0;
+  // for (var i in MY_ARRAY) {
+  //   tong += MY_ARRAY[i] > 0 ? MY_ARRAY[i] : 0;
+  // }
+  // ghiDapAn(1, `Tổng số dương = ${tong}`);
+  let tong = MY_ARRAY.reduce((prev, current) => {
+    if (current > 0) {
+      return prev + current;
+    } else {
+      return current;
+    }
+  }, 0);
+  ghiDapAn(1, `Tổng số dương = ${tong}`);
+}
+
+function tinhBai1_ver2() {
+  let tong = MY_ARRAY.reduce((prev, current) => prev + current, 0);
   ghiDapAn(1, `Tổng số dương = ${tong}`);
 }
 
@@ -120,14 +136,12 @@ function tinhBai6() {
   const viTri1 = document.getElementById("b6-vi-tri-1").value * 1;
   const viTri2 = document.getElementById("b6-vi-tri-2").value * 1;
   const new_MY_ARRAY = [...MY_ARRAY];
-  const char1 = new_MY_ARRAY[viTri1];
-  const char2 = new_MY_ARRAY[viTri2];
-  new_MY_ARRAY[viTri1] = char2;
-  new_MY_ARRAY[viTri2] = char1;
+  new_MY_ARRAY[viTri1] = new_MY_ARRAY[viTri2];
+  new_MY_ARRAY[viTri2] = new_MY_ARRAY[viTri1];
   document.getElementById("b6-result").innerText =
     "Mảng sau khi đổi chỗ: " +
     new_MY_ARRAY.join(", ") +
-    " (mảng này sẽ không thay đổi mảng thực tế)";
+    " (Dãy số này sẽ không thay đổi dãy số thực tế, mỗi lần đổi sẽ so sánh với dãy số nhập ban đầu)";
 }
 
 /**
@@ -184,7 +198,7 @@ function tinhBai8() {
  * process: isInterger()
  * output: số lượng các số nguyên (âm/dương)
  */
-let newArray = [...MY_ARRAY];
+
 function addNewElements() {
   let newElem = document.getElementById("b9-so-thuc").value * 1;
   if (newElem !== "") {
@@ -195,6 +209,7 @@ function addNewElements() {
   }
 }
 function tinhBai9() {
+  console.log(newArray);
   let filterInterger = newArray.filter((e) => Number.isInteger(e));
   document.querySelectorAll("#b9 .card-body p")[1].style.display = "block";
   document.getElementById("b9-result").innerText = filterInterger.length;
